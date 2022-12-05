@@ -3,6 +3,7 @@ package br.ada.sayajins.model;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Locale;
 
 public class Pagamentos {
@@ -56,6 +57,26 @@ public class Pagamentos {
         this.nome=s;
         this.dtVencto=dateVencto;
         this.tipoPagamentoEnum=tipoPagamentoEnum;
+    }
+
+    private static int verificaAtraso(LocalDate data){
+        return data.isBefore(LocalDate.now())?Period.between(data, LocalDate.now()).getMonths():0;
+    }
+
+    public void gerarAcrescimo(){
+        switch(this.tipoPagamentoEnum){
+            case CREDITO:
+                this.valor=this.valor.multiply(new BigDecimal("1.03")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                break;
+            case DEBITO:
+                this.valor=this.valor.multiply(new BigDecimal("1.01")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                break;
+            case BOLETO:
+                this.valor=this.valor.multiply(new BigDecimal("1.05")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                break;
+            default:
+                break;
+        }
     }
 
 
