@@ -1,4 +1,4 @@
-package br.ada.sayajins.model;
+package br.ada.sayajins.DAO;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
+
+import br.ada.sayajins.model.Pagamentos;
+import br.ada.sayajins.model.TipoPagamentoEnum;
 
 public class PagamentosDao {
     private static PagamentosDao instance; 
