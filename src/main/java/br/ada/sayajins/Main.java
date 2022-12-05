@@ -1,8 +1,13 @@
 package br.ada.sayajins;
 
-public class Main {
-    public static void main(String[] args) {
+import java.io.IOException;
 
+import br.ada.sayajins.model.PagamentosDao;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        PagamentosDao pagDao = PagamentosDao.getInstance();
+        pagDao.getAll().forEach(System.out::println);
     }
 
 }
