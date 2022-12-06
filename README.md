@@ -23,3 +23,10 @@ Façam um fork deste projeto, que deverá ser feito em grupo, com cada integrant
 Com o projeto concluído, enviem o link para o Class até o dia 9/12.
 
 Boa sorte!
+
+## Grupo 
+** Daniel Marco
+** Rafael  Lira
+** Eriberto Oliveira 
+** Mateus Cirilo
+** Lucas Barbosa
