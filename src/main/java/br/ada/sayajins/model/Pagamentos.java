@@ -66,13 +66,13 @@ public class Pagamentos {
     public void gerarAcrescimo(){
         switch(this.tipoPagamentoEnum){
             case CREDITO:
-                this.valor=this.valor.multiply(new BigDecimal("1.03")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                this.valor = this.valor.add(this.valor.multiply(new BigDecimal("0.03")).multiply(new BigDecimal(verificaAtraso(dtVencto))));
                 break;
             case DEBITO:
-                this.valor=this.valor.multiply(new BigDecimal("1.01")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                this.valor = this.valor.add(this.valor.multiply(new BigDecimal("0.01")).multiply(new BigDecimal(verificaAtraso(dtVencto))));
                 break;
             case BOLETO:
-                this.valor=this.valor.multiply(new BigDecimal("1.05")).multiply(new BigDecimal(verificaAtraso(dtVencto)));
+                this.valor = this.valor.add(this.valor.multiply(new BigDecimal("0.05")).multiply(new BigDecimal(verificaAtraso(dtVencto))));
                 break;
             default:
                 break;

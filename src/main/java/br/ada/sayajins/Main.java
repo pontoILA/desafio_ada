@@ -7,7 +7,10 @@ import br.ada.sayajins.DAO.PagamentosDao;
 public class Main {
     public static void main(String[] args) throws IOException {
         PagamentosDao pagDao = PagamentosDao.getInstance();
-        pagDao.getAll().forEach(System.out::println);
+        pagDao.getAll().forEach(pag ->{
+            pag.gerarAcrescimo();
+            System.out.println(pag);
+        });
     }
 
 }
