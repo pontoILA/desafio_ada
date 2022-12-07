@@ -49,6 +49,10 @@ public class PagamentosDao {
         return instance;
     }
 
+    public void salvarEmArquivo(Pagamentos pag){
+        // Faz coisas (Kendy farah essas coisas)
+    }
+
     @Override
     public String toString() {
         return listaPagamentos.toString();

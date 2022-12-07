@@ -59,8 +59,12 @@ public class Pagamentos {
         this.tipoPagamentoEnum=tipoPagamentoEnum;
     }
 
-    private static int verificaAtraso(LocalDate data){
-        return data.isBefore(LocalDate.now())?Period.between(data, LocalDate.now()).getMonths():0;
+    private static String verificaAtraso(LocalDate data){
+        return data.isBefore(LocalDate.now())?""+Math.abs(Period.between(data, LocalDate.now()).getMonths()):"0";
+    }
+
+    private static String verificarAdianto(LocalDate data){
+        return data.isAfter(LocalDate.now())? ""+Math.abs(Period.between(data, LocalDate.now()).getDays()) :"0";
     }
 
     public void gerarAcrescimo(){
@@ -79,19 +83,37 @@ public class Pagamentos {
         }
     }
 
+    public void gerarDecrescimo(){
+        switch(this.tipoPagamentoEnum){
+            case FIDELIDADE:
+                this.valor = this.valor.subtract(this.valor.multiply(new BigDecimal("0.005")).multiply(new BigDecimal(verificarAdianto(dtVencto))));
+                break;
+            case PIX:
+                this.valor = this.valor.subtract(this.valor.multiply(new BigDecimal("0.005")).multiply(new BigDecimal(verificarAdianto(dtVencto))));
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public String getValorFormatado(){
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
         return  formatter.format(this.valor.doubleValue());
     }
+
+    // Mateus esteve aqui
     @Override
+
     public String toString(){
-        return this.nome
-                   .concat("   |   ")
-                   .concat(this.dtVencto.toString())
-                   .concat("   |   ")
-                   .concat(this.getValorFormatado())
-                   .concat("   |   ")
-                   .concat(this.getTipoPagamentoEnum().name());
+
+        return String.format("%30s | ", this.nome)
+
+                   .concat(String.format("%10s | ", this.dtVencto.toString()))
+
+                   .concat(String.format("%12s | ", this.getValorFormatado()))
+
+                   .concat(String.format("%10s", this.getTipoPagamentoEnum().name()));
+
     }
 }

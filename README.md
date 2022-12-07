@@ -30,3 +30,5 @@ Boa sorte!
 ** Eriberto Oliveira 
 ** Mateus Cirilo
 ** Lucas Barbosa
+** Murilo Vidotto
+** Gabriel Kendy
