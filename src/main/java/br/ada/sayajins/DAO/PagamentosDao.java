@@ -1,7 +1,9 @@
 package br.ada.sayajins.DAO;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class PagamentosDao {
     }
 
     public List<Pagamentos> getAll(){
-        return Collections.unmodifiableList(listaPagamentos);
+        return listaPagamentos;
     }
 
     public static PagamentosDao getInstance() throws IOException{
@@ -49,8 +51,15 @@ public class PagamentosDao {
         return instance;
     }
 
-    public void salvarEmArquivo(Pagamentos pag){
-        // Faz coisas (Kendy farah essas coisas)
+    public void salvarEmArquivo(){
+        listaPagamentos.forEach((pag)->{
+            // Faz coisas (Kendy farah essas coisas)
+            try (PrintWriter out = new PrintWriter("src/main/resources/" + "PAGAMENTOS_"+ pag.getTipoPagamentoEnum().name() +"_"+ pag.getDtVencto() + ".txt")) {
+                    out.println(pag);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            });
     }
 
     @Override

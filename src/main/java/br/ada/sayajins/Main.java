@@ -20,6 +20,8 @@ public class Main {
         pagDao.getAll().stream().filter(pag->pag.getDtVencto().isBefore(LocalDate.now())).map(pag-> {pag.gerarAcrescimo(); return pag;}).forEach(System.out::println);
         System.out.println("---------------------------------------------------------ADIANTADOS---------------------------------------------------");
         pagDao.getAll().stream().filter(pag->pag.getDtVencto().isAfter(LocalDate.now())).map(pag-> {pag.gerarDecrescimo(); return pag;}).forEach(System.out::println);
+        
+        pagDao.salvarEmArquivo();
     }
 
 }
